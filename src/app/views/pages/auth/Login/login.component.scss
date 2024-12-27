@@ -1,0 +1,171 @@
+
+.background {
+  background-image: url('/assets/images/background.png');
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  /* Align items to the right */
+  padding-right: 9rem;
+  /* Add space on the right side */
+}
+
+.login_card {
+  padding: 2rem;
+  width: 32rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .background {
+    justify-content: center;
+    /* Center align for mobile */
+    padding-right: 0;
+    /* Remove right padding for mobile */
+  }
+
+  .login_card {
+    width: 90%;
+    /* Make the card responsive */
+    max-width: 400px;
+    /* Limit the maximum width */
+  }
+}
+
+/* Logo styling */
+.logo {
+  width: 18rem;
+  margin-bottom: 1.5rem;
+  align-self: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form label {
+  display: table-footer-group;
+  margin-bottom: 0.5rem;
+  color: #333;
+  font-size: 17px;
+  text-align: left;
+}
+
+.form input {
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 1rem;
+  font-size: 1rem;
+  outline: none;
+  // margin-bottom: 0; 
+}
+
+input::placeholder {
+  color: #aaa;
+}
+
+
+.form button {
+  background-color: #003366;
+  color: #fff;
+  border: none;
+  padding: 0.75rem;
+  border-radius: 2rem;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 1rem;
+  width: -webkit-fill-available;
+}
+
+.form button:hover {
+  background-color: #002244;
+}
+
+.book-tickets {
+  text-transform: none;
+  width: 145px;
+  background-color: #6542ff;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  color: #fff;
+  border: none;
+  font-size: 17px;
+}
+
+.header-sticky {
+  z-index: 9999;
+  top: 0px;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  position: sticky;
+  align-items: center;
+  place-content: center;
+  // background: white;
+}
+
+.border-shadow {
+  box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15);
+}
+
+.register-text {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+.register-text a {
+  color: #003366;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.register-text a:hover {
+  text-decoration: underline;
+}
+
+/* Fullscreen overlay */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5); /* Optional: dim the background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Ensure it appears on top */
+}
+
+/* Centered card */
+.centered-card {
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  max-width: 500px;
+  width: 90%;
+}
+
+.password-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-container input {
+  padding-right: 40px;
+  /* Add padding to the right to make space for the icon */
+}
+
+.password-icon {
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+  color: #757575;
+  /* You can adjust the color as needed */
+}

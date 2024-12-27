@@ -1,0 +1,105 @@
+[
+  {
+    "title": "Catalogue",
+    "isdisable": false,
+    "url": "/dashboard",
+    "src": "../assets/icon/grey/home.png"
+  },
+  {
+    "title": "Leads",
+    "isdisable": false,
+    "url": "/leads",
+    "src": "../assets/icon/home-01.svg"
+  },
+  {
+    "title": "Customers",
+    "isdisable": false,
+    "url": "/dashboard",
+    "src": "../assets/icon/home-01.svg"
+  },
+  {
+    "title": "RFQ",
+    "isdisable": false,
+    "url": "/rfq",
+    "src": "../assets/icon/home-01.svg"
+  },
+  {
+    "title": "PO",
+    "isdisable": false,
+    "url": "/po-customer",
+    "src": "../assets/icon/home-01.svg"
+  },
+  {
+    "title": "Parts",
+    "isdisable": false,
+    "url": "",
+    "src": "../assets/icon/home-01.svg"
+  },
+  {
+    "title": "Calendar",
+    "isdisable": false,
+    "url": "",
+    "src": "../assets/icon/home-01.svg"
+  },
+  {
+    "title": "Analytics",
+    "isdisable": false,
+    "url": "",
+    "src": "../assets/icon/home-01.svg"
+  },
+  {
+    "title": "Track",
+    "isdisable": false,
+    "url": "",
+    "src": "../assets/icon/home-01.svg"
+  },
+  {
+    "title": "My Profile",
+    "isdisable": false,
+    "url": "",
+    "src": "../assets/icon/home-01.svg"
+  },
+  {
+    "title": "Settings",
+    "isdisable": false,
+    "url": "",
+    "src": "../assets/icon/home-01.svg"
+  },
+  {
+    "title": "Communications",
+    "isdisable": false,
+    "url": "",
+    "src": "../assets/icon/home-01.svg"
+  },
+  {
+    "title": "Change Password",
+    "isdisable": false,
+    "url": "/changepassword",
+    "src": "../assets/icon/Reset Password/Confirm Password.svg"
+  },
+  {
+    "title": "Help",
+    "isdisable": false,
+    "src": "../assets/icon/settings-01.svg",
+    "children": [
+      {
+        "title": "Video Tutorials",
+        "isdisable": false,
+        "url": "",
+        "src": "../assets/icon/settings-01.svg"
+      }
+    ]
+  },
+  {
+    "title": "About Us",
+    "isdisable": false,
+    "url": "",
+    "src": "../assets/icon/help-01.svg"
+  },
+  {
+    "title": "Logout",
+    "isdisable": false,
+    "url": "/tabs/logout",
+    "src": "../assets/icon/logout-01.svg"
+  }
+]

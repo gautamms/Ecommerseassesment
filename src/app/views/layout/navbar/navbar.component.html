@@ -1,0 +1,46 @@
+<!-- navbar.component.html -->
+<nav class="navbar">
+  <div class="navbar-brand">ShopEasy</div>
+  <div class="navbar-icons">
+    <div class="cart-icon" >
+      <i class="fa fa-shopping-cart"></i>
+      <span *ngIf="cartCount > 0" class="badge">{{ cartCount }}</span>
+    </div>
+    </div>
+    <ul class="navbar-nav">
+
+      <li class="nav-item nav-profile" ngbDropdown>
+        <a class="nav-link" ngbDropdownToggle id="profileDropdown">
+          <i class="fa fa-user" aria-hidden="true"></i>
+        </a>
+        <div ngbDropdownMenu class="px-0 dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown"
+          style="width: max-content;">
+          <div class="dropdown-header d-flex flex-column align-items-center">
+            <div class="figure mb-3" *ngIf="profileImagePath">
+
+            </div>
+            <div class="info text-center">
+
+            </div>
+          </div>
+          <div class="dropdown-body">
+            <ul class="list-unstyled p-1">
+              <li class="dropdown-item py-2" ngbDropdownItem>
+                <a href="javascript:void(0)" class="nav-link d-flex align-items-center text-body ms-0">
+                  <i class="fa fa-user me-2 icon-md"></i>
+                  <span>Profile</span>
+                </a>
+              </li>
+              <li class="dropdown-item py-2" ngbDropdownItem>
+                <a href="javascript:void(0)" (click)="onLogout($event)"
+                  class="nav-link d-flex align-items-center text-body ms-0">
+                  <i class="fa fa-sign-out me-2 icon-md"></i>
+                  <span>Logout</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </li>
+    </ul>
+</nav>

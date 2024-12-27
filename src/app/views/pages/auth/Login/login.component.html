@@ -1,0 +1,49 @@
+<div class="background">
+
+    <div class="row">
+        <div class="pl-5 pr-5 card login_card">
+            <!-- <img src="/assets/imageicons/osantslogo.svg" alt="Logo" class="logo"> -->
+            <form class="form" id="login" [formGroup]="form">
+
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" placeholder="Username" formControlName="Username"
+                    maxlength="100" (input)="onInput($event)">
+                <div *ngIf="form.controls['Username']?.invalid && form.controls['Username']?.touched"
+                    class="text-muted danger">
+                    <span *ngIf="form.controls['Username']?.errors?.['required']">Username is required.</span>
+                </div>
+
+
+                <label for="password" class="mt-4">Password</label>
+                <div class="password-container">
+                    <input matInput class="form-control" [type]="showPassword ? 'text' : 'password'" id="Password"
+                        placeholder="Password" formControlName="Password" maxlength="30" />
+                    <mat-icon class="password-icon" (click)="passwordVisibility()">
+                        {{ showPassword ? 'visibility_off' : 'visibility' }}
+                    </mat-icon>
+                </div>
+                <div *ngIf="form.controls['Password'].errors && (form.controls['Password'].dirty || form.controls['Password'].touched)"
+                    class="text-muted danger">
+                    <span *ngIf="form.controls['Password'].hasError('required') && form.controls['Password'].touched">
+                        Password is required.
+                    </span>
+                    <span *ngIf="form.controls['Password'].hasError('pattern') && form.controls['Password'].touched">
+                        Please enter a valid password.
+                    </span>
+                    <span *ngIf="form.controls['Password'].hasError('minlength') && form.controls['Password'].touched">
+                        Password must have at least 8 characters.
+                    </span>
+
+                </div>
+
+                <div style="padding-top: 8px;text-align: right; margin-bottom: -9px;">
+                    <a class="link-color" style="font-weight: bold;cursor: pointer;" (click)="forgetPassword()">Forgot
+                        Password?</a>
+                </div>
+
+                <button class="mt-5" type="submit" (click)="submit()">Login</button>
+
+            </form>
+        </div>
+    </div>
+</div>

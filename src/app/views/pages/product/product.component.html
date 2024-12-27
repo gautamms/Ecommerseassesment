@@ -1,0 +1,27 @@
+<div class="grid-container">
+    <div class="grid-item" *ngFor="let product of products">
+      <div class="card" (click)="toProductDetail(product)">
+        <img
+          [src]="product.image"
+          class="card-img-top"
+          alt="{{ product.title }}"
+          (error)="onImageError($event)"
+        />
+        <div class="card-body">
+          <h5 class="card-title">{{ product.title }}</h5>
+          <p class="card-text text-truncate" [title]="product.description">
+            {{ product.description }}
+          </p>
+          <p class="card-text">
+            <strong>Price:</strong> ${{ product.price }}
+          </p>
+          <p class="card-text">
+            <strong>Rating:</strong>
+            {{ product.rating.rate }} ★ ({{ product.rating.count }} reviews)
+          </p>
+          <button class="btn btn-primary w-100" (click)="addToCart(product)">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  

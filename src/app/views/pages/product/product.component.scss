@@ -35,4 +35,40 @@
     flex-grow: 1;
     justify-content: space-between;
   }
+  .quantity-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: 15px 0;
+  }
+  
+  /* Quantity buttons styling */
+  .quantity-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    font-size: 20px;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 40px;
+    height: 40px;
+  }
+  
+  .quantity-btn:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Styling for the quantity input field */
+  .quantity-input {
+    width: 60px;
+    text-align: center;
+    font-size: 18px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    cursor: pointer;
+  }
   

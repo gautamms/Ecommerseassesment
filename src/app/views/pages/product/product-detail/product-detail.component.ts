@@ -30,7 +30,7 @@ export class ProductDetailComponent implements OnInit {
 
   onImageError(event: Event): void {
     const element = event.target as HTMLImageElement;
-    element.src = 'assets/sample-image.jpg'; // Provide a fallback image path
+    // element.src = 'assets/sample-image.jpg'; // Provide a fallback image path
   }
 
 }

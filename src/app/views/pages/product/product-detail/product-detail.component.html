@@ -1,20 +1,20 @@
 <div class="product-container">
     <div class="product-card">
       <img
-        [src]="product.image"
-        alt="{{ product.title }}"
+        [src]="product?.image"
+        alt="{{ product?.title }}"
         class="product-image"
         (error)="onImageError($event)"
       />
       <div class="product-details">
-        <h1 class="product-title">{{ product.title }}</h1>
-        <p class="product-description">{{ product.description }}</p>
+        <h1 class="product-title">{{ product?.title }}</h1>
+        <p class="product-description">{{ product?.description }}</p>
         <p class="product-price">
-          <strong>Price:</strong> ${{ product.price }}
+          <strong>Price:</strong> ${{ product?.price }}
         </p>
         <p class="product-rating">
-          <strong>Rating:</strong> {{ product.rating.rate }} ★ 
-          ({{ product.rating.count }} reviews)
+          <strong>Rating:</strong> {{ product?.rating.rate }} ★ 
+          ({{ product?.rating.count }} reviews)
         </p>
         <button class="btn btn-primary add-to-cart">Add to Cart</button>
       </div>

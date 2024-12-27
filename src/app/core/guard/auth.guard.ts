@@ -23,19 +23,20 @@ export class AuthGuard implements CanActivate {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    let menuItems: any[] = [];
-    const paths: string[] = [];
-    if (localStorage.getItem('isLoggedin') === 'true') {
-      if (state.url === '/dashboard') return true;
+    const isLoggedIn = localStorage.getItem('isLoggedin') === 'true';
 
-   
+    if (isLoggedIn) {
+      // If logged in, allow navigation
+      return true;
     } else {
+      // Save the current URL for redirect after login
+      localStorage.setItem('redirectUrl', state.url);
+
+      // Log the user out and navigate to the login page
       this.authService.logOut();
       this.router.navigate(['/auth/login']);
-      return false; // Ensure a value is returned after navigation
+      return false;
     }
-    this.authService.logOut();
-    this.router.navigate(['/auth/login']);
-    return false; // Return a default value
   }
+
 }

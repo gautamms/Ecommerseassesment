@@ -27,112 +27,8 @@ export class AuthenticationService {
   sessionData = new UserSession();
   tokenFromUI: string = "1e2f3g4c5h7a8x9q";
   tokenFromIV: any;
-  publicKey: string = `-----BEGIN PUBLIC KEY-----
-MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAr7o/DalwL4QSwci4feBK
-32Ggap0rTK8KEvFFAY5J3rUSp28b5yZT4Rtd2cNf7dQIANMb/E01UbIEt+DY+F+h
-vhh5+aFNDOpUvUy8/tM9Xg22s2UI8mDmmDL7IOGfSIV1Znr+G+D4yu7ThbpoyWa4
-ZYW0e+MSu1W4GijBDJcNTOVQndGG3CTKL37KPQgMmZh3Qe/uE/236Sz4U95JMrrD
-fyqfbsGS8eIe5+yWS2oX0LdUFuMoNQVuNTN5DlmsLUVYVAgy+H9wCBNWYY6KNYOp
-kMG4EwwDqvXIrPZJdM8PFJh4cxFBM1jQE16ot9SipeRuMDv1zDrI6ZIzrIinV7+E
-kwIDAQAB
------END PUBLIC KEY-----`;
   timeZones: any[];
-  menuItems = [
-    {
-      "title": "Leads",
-      "isdisable": false,
-      "url": "/leads",
-      "src": "../assets/images/Leads-1.svg",
-      "isSelected": true
-    },
-    {
-      "title": "RFQ",
-      "isdisable": false,
-      "url": "/rfq",
-      "src": "../assets/images/RFQ-1.svg",
-      "isSelected": true
-    },
-
-    {
-      "title": "PO",
-      "isdisable": false,
-      "url": "/po-customer",
-      "src": "../assets/images/PO-1.svg",
-      "isSelected": false
-    },
-    {
-      "title": "Catalogue",
-      "isdisable": false,
-      "url": "/dashboard",
-      "src": "../assets/images/Catalog.svg",
-      "isSelected": false
-    },
-    {
-      "title": "Customers",
-      "isdisable": false,
-      "url": "/dashboard",
-      "src": "../assets/images/customers.svg",
-      "isSelected": false
-    },
-    {
-      "title": "Communications",
-      "isdisable": false,
-      "url": "",
-      "src": "../assets/images/Communications.svg",
-      "isSelected": false
-    },
-
-    {
-      "title": "Calendar",
-      "isdisable": false,
-      "url": "",
-      "src": "../assets/images/Calendar.svg",
-      "isSelected": false
-    },
-    {
-      "title": "Parts",
-      "isdisable": false,
-      "url": "sendmail",
-      "src": "../assets/images/Parts-1.svg",
-      "isSelected": false
-    },
-    {
-      "title": "Settings",
-      "isdisable": false,
-      "url": "",
-      "src": "../assets/images/settings.svg",
-      "isSelected": false
-    },
-    {
-      "title": "Home",
-      "isdisable": false,
-      "url": "/dashboard",
-      "src": "../assets/images/Home.svg",
-      "isSelected": true
-    },
-
-    {
-      "title": "Tracking",
-      "isdisable": false,
-      "url": "",
-      "src": "../assets/images/Tracking.svg",
-      "isSelected": false
-    },
-    {
-      "title": "Analytics",
-      "isdisable": false,
-      "url": "",
-      "src": "../assets/images/Analytics.svg",
-      "isSelected": false
-
-    },
-    {
-      "title": "Packing List",
-      "isdisable": false,
-      "src": "../assets/images/Packing-list.svg",
-      "isSelected": false,
-    }
-  ];
+ 
 
   constructor(private sessionService: UserSessionService, private dataService: DataService,
     public translate: TranslateService, private http: HttpClient, private route: Router, private regionService: RegionService) {
@@ -140,16 +36,6 @@ kwIDAQAB
   }
 
   login(username: string, password: string) {
-    const headers = new HttpHeaders(
-      {
-        'Content-Type': 'application/json',
-      });
-
-    const timeZone = this.getBrowserTimeZone();
-
-    var rsa = forge.pki.publicKeyFromPem(this.publicKey);
-    var encryptedPassword = window.btoa(rsa.encrypt(password));
-
     const data = { username: username, password: password, };
     return this.http.post<any>(this.baseUrl + '/auth/login', data)
       .pipe(map(user => {
@@ -161,6 +47,7 @@ kwIDAQAB
           this.sessionService.create(this.sessionData);
           this.destroySession();
           localStorage.setItem('token', user.token);
+          localStorage.setItem('userId', decodedToken['sub']);
           localStorage.setItem('isLoggedin', 'true');
         }
         return user;

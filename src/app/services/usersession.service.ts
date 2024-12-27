@@ -65,9 +65,8 @@ export class UserSessionService {
   }
 
   userId(): any {
-    const jsonData = localStorage.getItem(this.localStorageSessionKey);
-    const data = JSON.parse(jsonData);
-    return jsonData && data ? data.userId : '';
+    const jsonData = localStorage.getItem('userId');
+    return jsonData ;
   }
 
   roleId(): number {

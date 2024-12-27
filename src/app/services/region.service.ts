@@ -29,4 +29,7 @@ export class RegionService {
   getProductbyId(id){
     return this.dataService.getRecord(`/products/${id}`);
   }
+  getUserCart(id){
+    return this.dataService.getRecord(`/carts/user/${id}`);
+  }
 }

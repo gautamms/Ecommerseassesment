@@ -19,7 +19,18 @@
             <strong>Rating:</strong>
             {{ product.rating.rate }} ★ ({{ product.rating.count }} reviews)
           </p>
-          <button class="btn btn-primary w-100" (click)="addToCart(product)">Add to Cart</button>
+          <div class="quantity-container">
+            <button class="quantity-btn" (click)="decreaseQuantity($event,product)">-</button>
+            <input 
+              class="quantity-input" 
+              type="number" 
+              [(ngModel)]="product.quantity" 
+              [min]="1" 
+              [max]="10"
+              readonly />
+            <button class="quantity-btn" (click)="increaseQuantity($event,product)">+</button>
+          </div>
+          <button class="btn btn-primary w-100" (click)="addToCart($event,product)">Add to Cart</button>
         </div>
       </div>
     </div>

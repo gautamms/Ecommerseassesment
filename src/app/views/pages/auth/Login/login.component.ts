@@ -79,7 +79,7 @@ export class LoginComponent implements OnInit {
       this.authService.login(this.form.value.Username, this.form.value.Password).subscribe((result: any) => {
         localStorage.setItem("interceptData", JSON.stringify(passwordInfo));
         if ('token' in result) {
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['/home']);
 
         }
         else if (result.isFailure) {

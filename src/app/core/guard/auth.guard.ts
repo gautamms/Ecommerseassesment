@@ -4,7 +4,6 @@ import { environment } from 'src/environments/environment';
 import { Location } from "@angular/common";
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { UserSessionService } from 'src/app/services/usersession.service';
-import { RegionService } from 'src/app/services/region.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +16,6 @@ export class AuthGuard implements CanActivate {
     private sessionService: UserSessionService,
     private router: Router,
     private _location: Location,
-    private regionService: RegionService
   ) {
 
   }
@@ -26,16 +24,16 @@ export class AuthGuard implements CanActivate {
     const isLoggedIn = localStorage.getItem('isLoggedin') === 'true';
 
     if (isLoggedIn) {
-      // If logged in, allow navigation
-      return true;
+      if (state.url === '/') {
+        this.router.navigate(['/home']);
+        return false; 
+      }
+      return true; 
     } else {
-      // Save the current URL for redirect after login
       localStorage.setItem('redirectUrl', state.url);
-
-      // Log the user out and navigate to the login page
-      this.authService.logOut();
-      this.router.navigate(['/auth/login']);
-      return false;
+      this.authService.logOut(); 
+      this.router.navigate(['/auth/login']); 
+      return false; 
     }
   }
 

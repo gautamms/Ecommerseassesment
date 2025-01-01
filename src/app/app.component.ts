@@ -9,7 +9,6 @@ import { UserSessionService } from './services/usersession.service';
 import { DataService } from './services/data.service';
 import { Spinkit } from 'ng-http-loader';
 import { LoadColorService } from './services/loadercolor.service';
-import { SplashScreenService } from './views/pages/splash-screen/splash-screen.service';
 
 @Component({
   selector: 'app-root',
@@ -35,7 +34,6 @@ export class AppComponent implements OnDestroy {
     private colorService: LoadColorService,
     private dataService: DataService,
     private sessionService: UserSessionService,
-    private splashScreenService: SplashScreenService
   ) {
     this.subscription = router.events.subscribe((event) => {
       if (event instanceof NavigationStart) {

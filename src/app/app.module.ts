@@ -29,12 +29,10 @@ import { NgxCountriesDropdownModule } from 'ngx-countries-dropdown';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { MatSelectModule } from '@angular/material/select';
 import { NavigationService } from './services/navigation.service';
-import { LeadService } from './services/lead.service';
 import { LayoutModule } from './views/layout/layout.module';
 import { NgbDropdownModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { NgApexchartsModule } from 'ng-apexcharts';
-// import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from '@danielmoncada/angular-datetime-picker';
 import { ObservableService } from './services/observable.service';
 export function createTranslateLoader(http: HttpClient) {
@@ -103,7 +101,6 @@ export function createTranslateLoader(http: HttpClient) {
     AuthenticationService,
     UserSessionService,
     NavigationService,
-    LeadService,
     ObservableService,
     {
       provide: HTTP_INTERCEPTORS,

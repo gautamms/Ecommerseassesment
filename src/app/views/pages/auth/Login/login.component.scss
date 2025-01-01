@@ -1,6 +1,6 @@
 
 .background {
-  background-image: url('/assets/images/background.png');
+  background-image: url('/assets/images/backgrdimg.png');
   background-size: cover;
   background-position: center;
   height: 100vh;
@@ -71,7 +71,7 @@ input::placeholder {
 
 
 .form button {
-  background-color: #003366;
+  background-color: #33A6D5;
   color: #fff;
   border: none;
   padding: 0.75rem;
@@ -83,7 +83,7 @@ input::placeholder {
 }
 
 .form button:hover {
-  background-color: #002244;
+  background-color: #007bff;
 }
 
 .book-tickets {

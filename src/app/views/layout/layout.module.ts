@@ -6,7 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatStepperModule } from '@angular/material/stepper';
 import { NgxCountriesDropdownModule } from 'ngx-countries-dropdown';
 import { BaseComponent } from './base/base.component';
-import { DashboardComponent } from '../pages/dashboard/dashboard.component';
+import { DashboardComponent } from '../pages/home/homecomponent';
 import { FooterComponent } from './footer/footer.component';
 import { LayoutRoutingModule } from './layout-routing.module';
 import { NavbarComponent } from './navbar/navbar.component';

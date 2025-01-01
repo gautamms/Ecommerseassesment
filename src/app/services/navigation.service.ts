@@ -8,16 +8,25 @@ export class NavigationService {
   }
 
   goToDashboard() {
-    this.router.navigate(['/dashboard']);
+    this.router.navigate(['/home']);
   }
 
   goToLogin() {
     this.router.navigate(['/auth/login']);
   }
 
- gotoProductDetail(id){
-  this.router.navigate([`/product/product-detail/${id}`]);
- }
+  gotoProductDetail(id) {
+    this.router.navigate([`/product/product-detail/${id}`]);
+  }
+
+  gotoProducts(category) {
+    this.router.navigate([`/product/${category}`]);
+
+  }
+
+  gotoProfile() {
+    this.router.navigate(['/profile'])
+  }
 
 }
 

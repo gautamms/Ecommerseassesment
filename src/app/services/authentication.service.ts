@@ -14,7 +14,7 @@ import { map } from 'rxjs';
 import * as forge from 'node-forge';
 import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
-import { RegionService } from './region.service';
+import { ProductService } from './product.service';
 //declare var forge: any;
 
 @Injectable({
@@ -31,7 +31,7 @@ export class AuthenticationService {
  
 
   constructor(private sessionService: UserSessionService, private dataService: DataService,
-    public translate: TranslateService, private http: HttpClient, private route: Router, private regionService: RegionService) {
+    public translate: TranslateService, private http: HttpClient, private route: Router, private productService: ProductService) {
     this.getTimeZones();
   }
 
@@ -48,6 +48,7 @@ export class AuthenticationService {
           this.destroySession();
           localStorage.setItem('token', user.token);
           localStorage.setItem('userId', decodedToken['sub']);
+          localStorage.setItem('userFullName', decodedToken['user']);
           localStorage.setItem('isLoggedin', 'true');
         }
         return user;

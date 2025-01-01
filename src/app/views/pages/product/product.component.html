@@ -1,33 +1,31 @@
-<div class="grid-container">
-    <div class="grid-item" *ngFor="let product of products">
+<div class="search-bar-container">
+  <button class="btn-primary back-button" (click)="gotoHome()">Back</button>
+  <div class="search-container">
+    <input type="text" placeholder="Search..." [(ngModel)]="searchQuery" (input)="onSearchChange()"
+      class="search-input" />
+  </div>
+</div>
+
+<ng-container *ngIf="filteredItems?.length >0">
+  <div [ngClass]="{'single-item-grid': filteredItems?.length === 1, 'grid-container': filteredItems?.length > 1}">
+    <div class="grid-item" *ngFor="let product of filteredItems">
       <div class="card" (click)="toProductDetail(product)">
-        <img
-          [src]="product.image"
-          class="card-img-top"
-          alt="{{ product.title }}"
-          (error)="onImageError($event)"
-        />
+        <img [src]="product?.image" class="card-img-top" alt="{{ product?.title }}" (error)="onImageError($event)" />
         <div class="card-body">
-          <h5 class="card-title">{{ product.title }}</h5>
-          <p class="card-text text-truncate" [title]="product.description">
-            {{ product.description }}
+          <h5 class="card-title">{{ product?.title }}</h5>
+          <p class="card-text text-truncate" [title]="product?.description">
+            {{ product?.description }}
           </p>
           <p class="card-text">
-            <strong>Price:</strong> ${{ product.price }}
+            <strong>Price:</strong> ${{ product?.price }}
           </p>
           <p class="card-text">
             <strong>Rating:</strong>
-            {{ product.rating.rate }} ★ ({{ product.rating.count }} reviews)
+            {{ product?.rating.rate }} ★ ({{ product?.rating.count }} reviews)
           </p>
           <div class="quantity-container">
             <button class="quantity-btn" (click)="decreaseQuantity($event,product)">-</button>
-            <input 
-              class="quantity-input" 
-              type="number" 
-              [(ngModel)]="product.quantity" 
-              [min]="1" 
-              [max]="10"
-              readonly />
+            <input class="quantity-input" type="number" [(ngModel)]="product.quantity" [min]="1" [max]="10" readonly />
             <button class="quantity-btn" (click)="increaseQuantity($event,product)">+</button>
           </div>
           <button class="btn btn-primary w-100" (click)="addToCart($event,product)">Add to Cart</button>
@@ -35,4 +33,14 @@
       </div>
     </div>
   </div>
-  
+</ng-container>
+
+<ng-container *ngIf="filteredItems?.length ==0">
+  <div class="container">
+    <div class="norecords">
+      <img src="/assets/images/norecords.jpg" alt="">
+
+    </div>
+
+  </div>
+</ng-container>

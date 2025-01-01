@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, Renderer2 } from '@angular/core';
 import { Route, Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { CommonService } from 'src/app/services/common.service';
+import { NavigationService } from 'src/app/services/navigation.service';
 import { ObservableService } from 'src/app/services/observable.service';
-import { RegionService } from 'src/app/services/region.service';
+import { ProductService } from 'src/app/services/product.service';
 import { UserSessionService } from 'src/app/services/usersession.service';
 import swal from "sweetalert2";
 
@@ -23,19 +25,37 @@ export class NavbarComponent implements OnInit {
   cartdata: any;
   product: any;
   showProfileDropdown = false;
+  user: string;
   constructor(private route: Router,
     private authService: AuthenticationService,
     private userSessionService: UserSessionService,
     private observableService: ObservableService,
-    private regionService: RegionService,
+    private productService: ProductService,
     private usersession: UserSessionService,
+    private common: CommonService,
+    private renderer: Renderer2,
+    private elRef: ElementRef,
+    private navigation: NavigationService,
+
 
   ) {
     this.id = this.usersession.userId();
-
+    this.user = this.usersession.userFullName();
+    this.getCartData();
   }
-  ngOnInit(): void {
+  ngOnInit() {
     this.getUserCarts();
+  }
+
+  getCartData() {
+    this.common.getUpdate().subscribe(cart => {
+      this.cartCount += cart.length
+      if (cart) {
+        cart.forEach(product => {
+          this.getProductById(product)
+        });
+      }
+    })
   }
   onLogout(e) {
     e.preventDefault();
@@ -59,6 +79,10 @@ export class NavbarComponent implements OnInit {
     })
   }
 
+  toProfile() {
+    this.navigation.gotoProfile();
+  }
+
   toggleCartDetails(): void {
     this.showCartDetails = !this.showCartDetails;
   }
@@ -67,13 +91,8 @@ export class NavbarComponent implements OnInit {
     this.showProfileDropdown = !this.showProfileDropdown;
   }
 
-  goToCart(): void {
-    console.log('Redirecting to cart...');
-    // Navigate to cart page
-  }
-
   getUserCarts() {
-    this.regionService.getUserCart(this.id).subscribe(res => {
+    this.productService.getUserCart(this.id).subscribe(res => {
       this.cartdata = res;
       this.cartCount = res[0].products.length
       if (res[0].products) {
@@ -86,13 +105,32 @@ export class NavbarComponent implements OnInit {
   }
 
   getProductById(item) {
-    this.regionService.getProductbyId(item.productId).subscribe(res => {
+    this.productService.getProductbyId(item.productId).subscribe(res => {
       res.quantity = item.quantity;
       this.cartItems.push(res)
-      console.log(this.cartItems,"productId");
-      
+
     })
   }
 
+  initNameIcon = () => {
+    if (this.user) {
+      const breakName = this.user.split(' ');
+      return breakName.length === 1 ? breakName[0].substr(0, 3) : breakName.reduce((acc, curr) => acc + curr.substr(0, 1), '').substr(0, 3);
+    }
+    return 'U';
+  }
+
+  @HostListener('document:click', ['$event'])
+  onClick(event: MouseEvent) {
+    if (!this.elRef.nativeElement.contains(event.target)) {
+      this.showProfileDropdown = false;
+      this.showCartDetails = false
+    }
+  }
+
+  onImageError(event: Event) {
+    const element = event.target as HTMLImageElement;
+    element.src = '/assets/images/category.svg'; 
+  }
 
 }

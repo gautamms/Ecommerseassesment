@@ -38,8 +38,8 @@ export class UserSessionService {
   }
 
   userFullName(): string {
-    const jsonData = localStorage.getItem(this.localStorageSessionKey);
-    return jsonData == null ? '' : JSON.parse(jsonData).userFullName;
+    const jsonData = localStorage.getItem("userFullName");
+    return jsonData;
   }
 
   rolename(): string {

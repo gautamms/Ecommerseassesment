@@ -3,7 +3,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CommonService } from 'src/app/services/common.service';
-import { RegionService } from 'src/app/services/region.service';
+import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-footer',
@@ -19,7 +19,7 @@ export class FooterComponent implements OnInit {
   private subscriptionName: Subscription;
   messageReceived: any;
   menudata: any;
-  constructor(public router: Router, private regionService: RegionService,
+  constructor(public router: Router, private productService: ProductService,
     private Service: CommonService,
     @Inject(DOCUMENT) private document: Document
   ) {

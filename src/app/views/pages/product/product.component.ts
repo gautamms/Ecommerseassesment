@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertService } from 'src/app/services/alert.service';
+import { CommonService } from 'src/app/services/common.service';
 import { NavigationService } from 'src/app/services/navigation.service';
-import { RegionService } from 'src/app/services/region.service';
+import { ProductService } from 'src/app/services/product.service';
 import { UserSessionService } from 'src/app/services/usersession.service';
 
 
@@ -16,13 +17,17 @@ export class ProductComponent implements OnInit {
   products: any = [];
   selectedQuantity: any;
   quantity: number = 1;
-  id: number
+  id: number;
+  searchQuery: string = '';
+  filteredItems: any[];
+
   constructor(private route: ActivatedRoute,
-    private regionService: RegionService,
+    private productService: ProductService,
     private router: Router,
     private navigation: NavigationService,
     private usersession: UserSessionService,
-    private alertservice :AlertService
+    private alertservice: AlertService,
+    private common: CommonService
 
   ) {
     route.params.subscribe(res => {
@@ -32,34 +37,34 @@ export class ProductComponent implements OnInit {
 
     this.id = this.usersession.userId();
   }
-  ngOnInit(): void {
+  ngOnInit() {
     this.getProducts()
   }
 
   getProducts() {
-    this.regionService.getCategoriesbyName(this.category).subscribe(res => {
+    this.productService.getCategoriesbyName(this.category).subscribe(res => {
       res.forEach(i => {
-        i.quantity = 1
-      })
+        i.quantity = 1;
+      });
       this.products = res;
-
-    })
+      this.filteredItems = [...this.products];
+    });
   }
 
   onImageError(event: Event): void {
     const element = event.target as HTMLImageElement;
-    // element.src = 'assets/sample-image.jpg'; // Path to your sample image
+     element.src = '/assets/images/category.svg'; 
   }
 
   toProductDetail(product) {
     this.navigation.gotoProductDetail(product.id);
   }
 
-  addToCart(event,product: any) {
+  addToCart(event, product: any) {
     event.stopPropagation();
     const cartData = {
-      userId: this.id, // Replace with dynamic userId
-      date: new Date().toISOString().split('T')[0], // Current date in YYYY-MM-DD format
+      userId: this.id, 
+      date: new Date().toISOString().split('T')[0],
       products: [
         {
           productId: product.id,
@@ -67,30 +72,44 @@ export class ProductComponent implements OnInit {
         }
       ]
     };
-    this.regionService.addCart(cartData).subscribe(res => {
-      console.log('Added to cart:', res);
+    this.productService.addCart(cartData).subscribe(res => {
+      this.common.sendUpdate(cartData.products)
       this.alertservice.success('Product added to cart successfully!');
     },
       (error) => {
-        console.error('Error adding to cart:', error);
         this.alertservice.error('Failed to add product to cart!');
       }
     );
   }
 
-  increaseQuantity(event: MouseEvent,product): void {
+  increaseQuantity(event: MouseEvent, product): void {
     event.stopPropagation(); // Prevent click event from propagating to card
     if (product.quantity < 10) {
       product.quantity++;
     }
   }
 
-  decreaseQuantity(event: MouseEvent,product): void {
+  decreaseQuantity(event: MouseEvent, product): void {
     event.stopPropagation(); // Prevent click event from propagating to card
     if (product.quantity > 1) {
       product.quantity--;
     }
   }
 
+  gotoHome() {
+    this.navigation.goToDashboard();
+  }
 
+  onSearchChange() {
+    const query = this.searchQuery.trim().toLowerCase();
+    if (query === '') {
+      this.filteredItems = [...this.products];
+    } else {
+      this.filteredItems = this.products.filter(item =>
+        item.title.toLowerCase().includes(query) ||
+        item.description.toLowerCase().includes(query) ||
+        item.category.toLowerCase().includes(query)
+      );
+    }
+  }
 }

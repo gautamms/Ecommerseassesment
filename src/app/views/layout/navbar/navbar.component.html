@@ -1,28 +1,15 @@
 <nav class="navbar">
-  <div class="navbar-brand">ShopEasy</div>
+  <div class="navbar-brand" style="color:#fff">ShopEasy</div>
+
+
   <div class="navbar-icons">
     <div class="cart-icon" (click)="toggleCartDetails()">
       <i class="fa fa-shopping-cart"></i>
       <span *ngIf="cartCount > 0" class="badge">{{ cartCount }}</span>
     </div>
-    <ul class="navbar-nav">
-      <li class="nav-item nav-profile" ngbDropdown>
-        <a class="nav-link" ngbDropdownToggle id="profileDropdown" (click)="toggleProfileDropdown()">
-          <i class="fa fa-user" aria-hidden="true"></i>
-        </a>
-        <div *ngIf="showProfileDropdown" class="profile-dropdown">
-          <div class="profile-header">
-            <img src="your-profile-picture-url" alt="Profile" class="profile-avatar" />
-            <span class="profile-name">User Name</span>
-          </div>
-          <div class="profile-options">
-            <button>Profile</button>
-            <button (click)="onLogout($event)">Logout</button>
-          </div>
-        </div>
-      </li>
-    </ul>
-    
+    <div class="cart-icon" (click)="toggleProfileDropdown()">
+      <i class="fa fa-user"></i>
+    </div>
   </div>
 </nav>
 
@@ -31,7 +18,7 @@
   <div class="cart-details">
     <h4 class="cart-title">Your Cart</h4>
     <div *ngFor="let item of cartItems" class="cart-item">
-      <img [src]="item.image" alt="{{ item.title }}" class="cart-item-img" />
+      <img [src]="item.image" alt="{{ item.title }}" class="cart-item-img"  (error)="onImageError($event)" />
       <div class="cart-item-info">
         <span class="cart-item-title">{{ item.title }}</span>
         <div class="cart-item-quantity">
@@ -39,8 +26,14 @@
         </div>
       </div>
     </div>
-    <button class="btn btn-go-to-cart" (click)="goToCart()">Go to Cart</button>
   </div>
 </div>
 
-
+<div [ngClass]="{'profile-details-popup': true, 'show': showProfileDropdown}">
+  <div class="profile-dropdown-content">
+    <ul>
+      <li (click)="toProfile()">Profile</li>
+      <li (click)="onLogout($event)">Log Out</li>
+    </ul>
+  </div>
+</div>
